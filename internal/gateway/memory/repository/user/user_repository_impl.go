@@ -1,0 +1,33 @@
+package user
+
+import (
+	"context"
+
+	"github.com/Haya372/go-samples/internal/domain/user"
+	"github.com/Haya372/go-samples/internal/domain/vo"
+	"golang.org/x/crypto/bcrypt"
+)
+
+type userRepositoryImpl struct{}
+
+func (repo *userRepositoryImpl) FindByEmail(ctx context.Context, userId vo.UserId) (*user.User, error) {
+	hash, _ := bcrypt.GenerateFromPassword([]byte("password"), bcrypt.DefaultCost)
+	users := map[vo.UserId]user.User{
+		vo.UserId("user-id-1"): user.User{
+			Id:       vo.UserId("user-id-1"),
+			Name:     "Test User",
+			Password: vo.Password(hash),
+		},
+	}
+
+	u, exists := users[userId]
+	if !exists {
+		return nil, nil
+	}
+
+	return &u, nil
+}
+
+func NewUserRepository() user.UserRepository {
+	return &userRepositoryImpl{}
+}
