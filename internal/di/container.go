@@ -5,11 +5,11 @@ import "go.uber.org/dig"
 func NewDiContainer() (*dig.Container, error) {
 	c := dig.New()
 
-	if err := c.Provide(NewEngine); err != nil {
+	if err := c.Provide(newEngine); err != nil {
 		return nil, err
 	}
 
-	if err := ProvideControllers(c); err != nil {
+	if err := provideControllers(c); err != nil {
 		return nil, err
 	}
 

@@ -6,20 +6,20 @@ import (
 	"go.uber.org/dig"
 )
 
-func ProvideControllers(c *dig.Container) error {
+func provideControllers(c *dig.Container) error {
 	if err := c.Provide(controller.NewHealthCheckController, dig.Group("controller")); err != nil {
 		return err
 	}
 	return nil
 }
 
-type ControllerParams struct {
+type controllerParams struct {
 	dig.In
 
 	Controllers []controller.Controller `group:"controller"`
 }
 
-func NewEngine(p ControllerParams) *gin.Engine {
+func newEngine(p controllerParams) *gin.Engine {
 	r := gin.Default()
 	for _, c := range p.Controllers {
 		c.SetRoute(r)
