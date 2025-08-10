@@ -13,5 +13,21 @@ func NewDiContainer() (*dig.Container, error) {
 		return nil, err
 	}
 
+	if err := provideMiddlewares(c); err != nil {
+		return nil, err
+	}
+
+	if err := provideRepositories(c); err != nil {
+		return nil, err
+	}
+
+	if err := provideServices(c); err != nil {
+		return nil, err
+	}
+
+	if err := provideUsecases(c); err != nil {
+		return nil, err
+	}
+
 	return c, nil
 }
