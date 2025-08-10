@@ -10,6 +10,10 @@ func provideControllers(c *dig.Container) error {
 	if err := c.Provide(controller.NewHealthCheckController, dig.Group("controller")); err != nil {
 		return err
 	}
+
+	if err := c.Provide(controller.NewLoginController, dig.Group("controller")); err != nil {
+		return err
+	}
 	return nil
 }
 
