@@ -19,7 +19,11 @@ func main() {
 	if err := c.Invoke(func(r *gin.Engine) {
 		ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGTERM, syscall.SIGINT)
 		defer stop()
-		go r.Run()
+		go func() {
+			if err := r.Run(); err != nil {
+				panic(err)
+			}
+		}()
 		<-ctx.Done()
 		fmt.Println("shutdown server...")
 	}); err != nil {
