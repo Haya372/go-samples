@@ -1,4 +1,4 @@
-package error
+package err
 
 type Error interface {
 	Error() string
@@ -6,22 +6,23 @@ type Error interface {
 	Message() string
 }
 
-type errorImpl struct {
+type customError struct {
+	error
+
 	status  int
 	message string
-	error
 }
 
-func (e *errorImpl) Status() int {
+func (e *customError) Status() int {
 	return e.status
 }
 
-func (e *errorImpl) Message() string {
+func (e *customError) Message() string {
 	return e.message
 }
 
 func newError(err error, status int, message string) Error {
-	return &errorImpl{
+	return &customError{
 		error:   err,
 		status:  status,
 		message: message,

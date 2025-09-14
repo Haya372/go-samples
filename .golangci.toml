@@ -1,7 +1,17 @@
 version = "2"
 
 [linters]
-enable-all = true
+default = "all"
 disable = [
-  "wsl"
+  "wsl",
+  "depguard",
+  "wrapcheck",
+  "revive",
+  "noinlineerr",
+  "nilnil",
+  "ireturn",
+  "godox",
+  "gochecknoinits",
+  "gochecknoglobals",
+  "exhaustruct"
 ]

@@ -9,5 +9,6 @@ func provideServices(c *dig.Container) error {
 	if err := c.Provide(service.NewUserAuthenticateService); err != nil {
 		return err
 	}
+
 	return nil
 }

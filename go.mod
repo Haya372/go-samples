@@ -5,6 +5,7 @@ go 1.23.2
 require (
 	github.com/appleboy/gin-jwt/v2 v2.10.3
 	github.com/gin-gonic/gin v1.10.0
+	github.com/pkg/errors v0.9.1
 	go.uber.org/dig v1.18.0
 	golang.org/x/crypto v0.36.0
 )

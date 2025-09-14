@@ -14,6 +14,7 @@ func provideControllers(c *dig.Container) error {
 	if err := c.Provide(controller.NewLoginController, dig.Group("controller")); err != nil {
 		return err
 	}
+
 	return nil
 }
 
@@ -28,5 +29,6 @@ func newEngine(p controllerParams) *gin.Engine {
 	for _, c := range p.Controllers {
 		c.SetRoute(r)
 	}
+
 	return r
 }

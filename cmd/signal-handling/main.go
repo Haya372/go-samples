@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"fmt"
+	"log/slog"
 	"os"
 	"os/signal"
 	"syscall"
@@ -14,16 +14,17 @@ func main() {
 	defer stop()
 
 	// channelを使った方法
-	c := make(chan os.Signal, 1)
-	signal.Notify(c, syscall.SIGUSR1)
+	signalCh := make(chan os.Signal, 1)
+	signal.Notify(signalCh, syscall.SIGUSR1)
+
 	for {
 		select {
 		case <-ctx.Done():
-			fmt.Println("received context")
-			fmt.Println("finish process")
+			slog.Info("finish process")
+
 			return
-		case <-c:
-			fmt.Println("received channel")
+		case <-signalCh:
+			slog.Debug("received channel")
 		}
 	}
 }

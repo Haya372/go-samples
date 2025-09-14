@@ -9,5 +9,6 @@ func provideUsecases(c *dig.Container) error {
 	if err := c.Provide(login.NewLoginUsecase); err != nil {
 		return err
 	}
+
 	return nil
 }

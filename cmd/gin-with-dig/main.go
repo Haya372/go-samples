@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"fmt"
+	"log/slog"
 	"os/signal"
 	"syscall"
 
@@ -25,7 +25,7 @@ func main() {
 			}
 		}()
 		<-ctx.Done()
-		fmt.Println("shutdown server...")
+		slog.Info("shutdown server...")
 	}); err != nil {
 		panic(err)
 	}

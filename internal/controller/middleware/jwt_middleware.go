@@ -33,22 +33,23 @@ func NewGinJwtMiddleware(conf JwtConfig, loginUsecase login.LoginUsecase) *jwt.G
 		TokenHeadName: "Bearer",
 		TokenLookup:   "header: Authorization, cookie: jwt",
 
-		Authenticator: func(c *gin.Context) (interface{}, error) {
+		Authenticator: func(ctx *gin.Context) (interface{}, error) {
 			var loginParam struct {
-				Id       string `form:"id" json:"id" binding:"required"`
-				Password string `form:"password" json:"password" binding:"required"`
+				Id       string `binding:"required" form:"id"       json:"id"`
+				Password string `binding:"required" form:"password" json:"password"`
 			}
-			if err := c.ShouldBind(&loginParam); err != nil {
+			if err := ctx.ShouldBind(&loginParam); err != nil {
 				return nil, jwt.ErrMissingLoginValues
 			}
 
-			user, err := loginUsecase.Execute(c, login.LoginParam{
+			user, err := loginUsecase.Execute(ctx, login.LoginParam{
 				UserId:      vo.UserId(loginParam.Id),
 				RawPassword: loginParam.Password,
 			})
 
 			if err != nil {
 				slog.Error("authentication failed", "error", err)
+
 				return nil, jwt.ErrFailedAuthentication
 			}
 
@@ -61,10 +62,10 @@ func NewGinJwtMiddleware(conf JwtConfig, loginUsecase login.LoginUsecase) *jwt.G
 					identityKey: user.Id,
 				}
 			}
+
 			return jwt.MapClaims{}
 		},
 	})
-
 	if err != nil {
 		panic(err)
 	}

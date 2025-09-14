@@ -3,31 +3,31 @@ package di
 import "go.uber.org/dig"
 
 func NewDiContainer() (*dig.Container, error) {
-	c := dig.New()
+	container := dig.New()
 
-	if err := c.Provide(newEngine); err != nil {
+	if err := container.Provide(newEngine); err != nil {
 		return nil, err
 	}
 
-	if err := provideControllers(c); err != nil {
+	if err := provideControllers(container); err != nil {
 		return nil, err
 	}
 
-	if err := provideMiddlewares(c); err != nil {
+	if err := provideMiddlewares(container); err != nil {
 		return nil, err
 	}
 
-	if err := provideRepositories(c); err != nil {
+	if err := provideRepositories(container); err != nil {
 		return nil, err
 	}
 
-	if err := provideServices(c); err != nil {
+	if err := provideServices(container); err != nil {
 		return nil, err
 	}
 
-	if err := provideUsecases(c); err != nil {
+	if err := provideUsecases(container); err != nil {
 		return nil, err
 	}
 
-	return c, nil
+	return container, nil
 }

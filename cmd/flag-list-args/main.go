@@ -2,7 +2,7 @@ package main
 
 import (
 	"flag"
-	"fmt"
+	"log/slog"
 	"strings"
 )
 
@@ -14,6 +14,7 @@ type StringList []string
 
 func (l *StringList) Set(s string) error {
 	*l = append(*l, s)
+
 	return nil
 }
 
@@ -28,5 +29,5 @@ func init() {
 }
 
 func main() {
-	fmt.Printf("args=%v\n", args)
+	slog.Debug("process", "args", args)
 }

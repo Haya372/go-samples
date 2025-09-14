@@ -9,5 +9,6 @@ func provideRepositories(c *dig.Container) error {
 	if err := c.Provide(user.NewUserRepository); err != nil {
 		return err
 	}
+
 	return nil
 }

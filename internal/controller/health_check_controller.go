@@ -1,6 +1,10 @@
 package controller
 
-import "github.com/gin-gonic/gin"
+import (
+	"net/http"
+
+	"github.com/gin-gonic/gin"
+)
 
 type healthCheckController struct{}
 
@@ -9,7 +13,7 @@ func (c *healthCheckController) SetRoute(r gin.IRouter) {
 }
 
 func (c *healthCheckController) Handle(ctx *gin.Context) {
-	ctx.JSON(200, gin.H{
+	ctx.JSON(http.StatusOK, gin.H{
 		"message": "ok",
 	})
 }
