@@ -11,13 +11,12 @@ type transactionManagerImpl struct {
 }
 
 func (txm *transactionManagerImpl) Do(ctx context.Context, f func(ctx context.Context) error) error {
-	slog.Debug("start transaction")
-	if err := f(ctx); err == nil {
-		slog.Debug("commit transaction")
+	slog.Info("start transaction")
+	if err := f(ctx); err != nil {
+		slog.Info("rollback transaction")
 		return err
-	} else {
-		slog.Debug("rollback transaction")
 	}
+	slog.Info("commit transaction")
 	return nil
 }
 
