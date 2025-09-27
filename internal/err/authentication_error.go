@@ -2,12 +2,10 @@ package err
 
 import (
 	"net/http"
-
-	"github.com/pkg/errors"
 )
 
-var (
-	errAuthenticationFailed = errors.New("authentication failed")
+const (
+	AuthenticationFailed ErrorCode = "AUTHENTICATION_FAILED"
 )
 
 type AuthenticationError struct {
@@ -19,5 +17,5 @@ func (e *AuthenticationError) Error() string {
 }
 
 func NewAuthenticationError(msg string) Error {
-	return newError(errAuthenticationFailed, http.StatusUnauthorized, msg)
+	return newError(AuthenticationFailed, http.StatusUnauthorized, msg)
 }
