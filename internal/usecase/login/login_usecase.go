@@ -8,7 +8,7 @@ import (
 	"github.com/Haya372/go-samples/internal/domain/user"
 	"github.com/Haya372/go-samples/internal/domain/vo"
 
-	customErr "github.com/Haya372/go-samples/internal/err"
+	customErr "github.com/Haya372/go-samples/internal/common/err"
 )
 
 type LoginParam struct {
