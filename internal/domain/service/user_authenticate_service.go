@@ -15,7 +15,7 @@ type userAuthenticateServiceImpl struct {
 }
 
 func (s *userAuthenticateServiceImpl) Execute(ctx context.Context, user user.User, rawPassword string) bool {
-	err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(rawPassword))
+	err := bcrypt.CompareHashAndPassword([]byte(user.Password.Value()), []byte(rawPassword))
 
 	return err == nil
 }

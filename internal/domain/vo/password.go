@@ -1,3 +1,9 @@
 package vo
 
-type Password string
+type Password Vo[string]
+
+func NewPassword(value string) Password {
+	return &voImpl[string]{
+		value: value,
+	}
+}

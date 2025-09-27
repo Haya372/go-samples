@@ -43,7 +43,7 @@ func NewGinJwtMiddleware(conf JwtConfig, loginUsecase login.LoginUsecase) *jwt.G
 			}
 
 			user, err := loginUsecase.Execute(ctx, login.LoginParam{
-				UserId:      vo.UserId(loginParam.Id),
+				UserId:      vo.NewUserId(loginParam.Id),
 				RawPassword: loginParam.Password,
 			})
 

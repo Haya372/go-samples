@@ -13,10 +13,10 @@ type userRepositoryImpl struct{}
 func (repo *userRepositoryImpl) FindByEmail(ctx context.Context, userId vo.UserId) (*user.User, error) {
 	hash, _ := bcrypt.GenerateFromPassword([]byte("password"), bcrypt.DefaultCost)
 	users := map[vo.UserId]user.User{
-		vo.UserId("user-id-1"): user.User{
-			Id:       vo.UserId("user-id-1"),
+		vo.NewUserId("user-id-1"): {
+			Id:       vo.NewUserId("user-id-1"),
 			Name:     "Test User",
-			Password: vo.Password(hash),
+			Password: vo.NewPassword(string(hash)),
 		},
 	}
 
