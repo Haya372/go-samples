@@ -59,7 +59,7 @@ func NewGinJwtMiddleware(conf JwtConfig, loginUsecase login.LoginUsecase) *jwt.G
 		PayloadFunc: func(data interface{}) jwt.MapClaims {
 			if user, ok := data.(*user.User); ok {
 				return jwt.MapClaims{
-					identityKey: user.Id,
+					identityKey: user.Id.Value(),
 				}
 			}
 
