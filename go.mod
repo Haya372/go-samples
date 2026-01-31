@@ -5,7 +5,7 @@ go 1.24.0
 require (
 	github.com/appleboy/gin-jwt/v2 v2.10.3
 	github.com/gin-gonic/gin v1.11.0
-	go.uber.org/dig v1.18.0
+	go.uber.org/dig v1.19.0
 	golang.org/x/crypto v0.47.0
 )
 
